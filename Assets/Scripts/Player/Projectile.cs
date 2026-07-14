@@ -236,7 +236,7 @@ public class Projectile : MonoBehaviour
         // Re-align the projectile's orientation to match new direction
         if (reflectedVelocity.sqrMagnitude > 0.001f)
         {
-            float angle = Mathf.Atan2(reflectedVelocity.y, reflectedVelocity.x) * Mathf.RadDeg;
+            float angle = Mathf.Atan2(reflectedVelocity.y, reflectedVelocity.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
