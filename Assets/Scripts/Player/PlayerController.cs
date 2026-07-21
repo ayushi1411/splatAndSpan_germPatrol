@@ -248,9 +248,16 @@ public class PlayerController : MonoBehaviour
     public void UpgradeBackpack(int carbonInc, int oxygenInc)
     {
         // Permanently increase backpack capacities
-        maxCarbon = Mathf.Min(100, maxCarbon + carbonInc);
-        maxOxygen = Mathf.Min(50, maxOxygen + oxygenInc);
-        
+        if (maxCarbon < 100 || maxOxygen < 50)
+        {
+            maxCarbon = Mathf.Min(100, maxCarbon + carbonInc);
+            maxOxygen = Mathf.Min(50, maxOxygen + oxygenInc);
+        }
+        else
+        {
+            currentCarbon = Mathf.Min(100, currentCarbon + carbonInc);
+            currentOxygen = Mathf.Min(50, currentOxygen + oxygenInc);
+        }
         // Note: Does NOT refill elements. Player must harvest elements to fill new capacity.
         Debug.Log($"Backpack upgraded! Max Carbon: {maxCarbon}, Max Oxygen: {maxOxygen}");
     }
@@ -261,9 +268,13 @@ public class PlayerController : MonoBehaviour
         Collider2D[] passiveColliders = Physics2D.OverlapCircleAll(transform.position, passiveSuctionRadius);
         foreach (var col in passiveColliders)
         {
-            if (col.CompareTag("Collectible"))
+            if (col.CompareTag("Collectibles"))
             {
-                PullCollectible(col.gameObject, 1.0f);
+                Collectibles item = col.GetComponent<Collectibles>();
+                if (item != null && item.CanBePulled(this))
+                {
+                    PullCollectible(col.gameObject, 1.0f);
+                }
             }
         }
 
@@ -284,10 +295,14 @@ public class PlayerController : MonoBehaviour
                 if (angleToCollider <= activeSuctionAngle * 0.5f)
                 {
                     // Inside suction cone!
-                    if (col.CompareTag("Collectible"))
+                    if (col.CompareTag("Collectibles"))
                     {
                         // Pull at triple velocity, ignore obstacles (trigger pulls through walls)
-                        PullCollectible(col.gameObject, 3.0f);
+                        Collectibles item = col.GetComponent<Collectibles>();
+                        if (item != null && item.CanBePulled(this))
+                        {
+                            PullCollectible(col.gameObject, 3.0f);
+                        }
                     }
                     else if (col.CompareTag("Enemy") || col.CompareTag("TestDummy"))
                     {
