@@ -17,7 +17,7 @@ public class BioMatterTests
         player = playerObj.AddComponent<PlayerController>();
         weapon = playerObj.AddComponent<PlayerWeapon>();
         
-        player.currentBioMatter = 0;
+        // Stats initialize to defaults.
     }
 
     [TearDown]
@@ -41,6 +41,6 @@ public class BioMatterTests
         
         InvokeOnCollect(bio);
         
-        Assert.AreEqual(10, player.currentBioMatter, "BioMatter did not add the correct score value.");
+        Assert.AreEqual(10, player.CurrentBioMatter, "BioMatter did not add the correct score value.");
     }
 }

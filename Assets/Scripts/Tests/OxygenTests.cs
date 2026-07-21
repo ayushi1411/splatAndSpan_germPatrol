@@ -17,8 +17,7 @@ public class OxygenTests
         player = playerObj.AddComponent<PlayerController>();
         weapon = playerObj.AddComponent<PlayerWeapon>();
         
-        player.maxOxygen = 100;
-        player.currentOxygen = 0;
+        // Stats initialize to defaults.
     }
 
     [TearDown]
@@ -42,6 +41,6 @@ public class OxygenTests
         
         InvokeOnCollect(oxygen);
         
-        Assert.AreEqual(1, player.currentOxygen, "Oxygen collectible did not add 1 oxygen.");
+        Assert.AreEqual(1, player.CurrentOxygen, "Oxygen collectible did not add 1 oxygen.");
     }
 }

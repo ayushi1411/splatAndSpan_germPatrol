@@ -17,8 +17,7 @@ public class BackpackUpgradeTests
         player = playerObj.AddComponent<PlayerController>();
         weapon = playerObj.AddComponent<PlayerWeapon>();
         
-        player.maxCarbon = 60;
-        player.maxOxygen = 30;
+        // Stats initialize to defaults.
     }
 
     [TearDown]
@@ -42,7 +41,7 @@ public class BackpackUpgradeTests
         
         InvokeOnCollect(upgrade);
         
-        Assert.Greater(player.maxCarbon, 60, "Backpack upgrade did not increase max carbon.");
-        Assert.Greater(player.maxOxygen, 30, "Backpack upgrade did not increase max oxygen.");
+        Assert.Greater(player.MaxCarbon, 60, "Backpack upgrade did not increase max carbon.");
+        Assert.Greater(player.MaxOxygen, 30, "Backpack upgrade did not increase max oxygen.");
     }
 }

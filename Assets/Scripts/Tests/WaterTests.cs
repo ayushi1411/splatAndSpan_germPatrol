@@ -17,8 +17,8 @@ public class WaterTests
         player = playerObj.AddComponent<PlayerController>();
         weapon = playerObj.AddComponent<PlayerWeapon>();
         
-        player.maxHealth = 100f;
-        player.currentHealth = 80f;
+        // Damage player for test
+        typeof(PlayerController).GetField("currentHealth", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(player, 80f);
     }
 
     [TearDown]
@@ -42,6 +42,6 @@ public class WaterTests
         
         InvokeOnCollect(water);
         
-        Assert.AreEqual(100f, player.currentHealth, "Water did not heal the player correctly.");
+        Assert.AreEqual(100f, player.CurrentHealth, "Water did not heal the player correctly.");
     }
 }
