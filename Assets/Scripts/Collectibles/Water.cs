@@ -19,7 +19,7 @@ public class Water : Collectibles
 
     public override bool CanBePulled(PlayerController player)
     {
-        return player.currentHealth < player.maxHealth;
+        return player.CurrentHealth < player.MaxHealth;
     }
 
     protected override void OnCollect(PlayerController playerController, PlayerWeapon playerWeapon)

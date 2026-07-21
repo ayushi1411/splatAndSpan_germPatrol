@@ -64,7 +64,7 @@ public class PlayerWeapon : MonoBehaviour
             float carbonCostPerShot = solventCarbonCostPerSec / solventFireRate;
             float oxygenCostPerShot = solventOxygenCostPerSec / solventFireRate;
 
-            if (playerController.currentCarbon >= carbonCostPerShot && playerController.currentOxygen >= oxygenCostPerShot)
+            if (playerController.CurrentCarbon >= carbonCostPerShot && playerController.CurrentOxygen >= oxygenCostPerShot)
             {
                 if (Time.time >= nextSolventTime)
                 {
@@ -101,14 +101,14 @@ public class PlayerWeapon : MonoBehaviour
         if (accumulatedCarbonCost >= 1.0f)
         {
             int intC = Mathf.FloorToInt(accumulatedCarbonCost);
-            playerController.currentCarbon = Mathf.Max(0, playerController.currentCarbon - intC);
+            playerController.ConsumeCarbon(intC);
             accumulatedCarbonCost -= intC;
         }
 
         if (accumulatedOxygenCost >= 1.0f)
         {
             int intO = Mathf.FloorToInt(accumulatedOxygenCost);
-            playerController.currentOxygen = Mathf.Max(0, playerController.currentOxygen - intO);
+            playerController.ConsumeOxygen(intO);
             accumulatedOxygenCost -= intO;
         }
     }

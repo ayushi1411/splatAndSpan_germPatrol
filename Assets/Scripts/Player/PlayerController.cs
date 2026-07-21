@@ -14,20 +14,36 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
 
     [Header("Health & Shield")]
-    public float maxHealth = 100f;
-    public float currentHealth = 100f;
-    public float maxShield = 100f;
-    public float currentShield = 100f;
+    [SerializeField] private float maxHealth = 100f;
+    public float MaxHealth { get { return maxHealth; } }
+    
+    [SerializeField] private float currentHealth = 100f;
+    public float CurrentHealth { get { return currentHealth; } }
+    
+    [SerializeField] private float maxShield = 100f;
+    public float MaxShield { get { return maxShield; } }
+    
+    [SerializeField] private float currentShield = 100f;
+    public float CurrentShield { get { return currentShield; } }
     public float shieldRegenRate = 5.0f;
     public float shieldRegenDelay = 4.0f;
     private float lastDamageTime;
 
     [Header("Element Inventory")]
-    public int currentCarbon = 0;
-    public int maxCarbon = 60;
-    public int currentOxygen = 0;
-    public int maxOxygen = 30;
-    public int currentBioMatter = 0;
+    [SerializeField] private int currentCarbon = 0;
+    public int CurrentCarbon { get { return currentCarbon; } }
+    
+    [SerializeField] private int maxCarbon = 60;
+    public int MaxCarbon { get { return maxCarbon; } }
+    
+    [SerializeField] private int currentOxygen = 0;
+    public int CurrentOxygen { get { return currentOxygen; } }
+    
+    [SerializeField] private int maxOxygen = 30;
+    public int MaxOxygen { get { return maxOxygen; } }
+    
+    [SerializeField] private int currentBioMatter = 0;
+    public int CurrentBioMatter { get { return currentBioMatter; } }
 
     [Header("Vacuum System")]
     public float passiveSuctionRadius = 5.0f;
@@ -37,8 +53,11 @@ public class PlayerController : MonoBehaviour
     public float activeSuctionDamage = 5.0f; // DPS
     
     [Header("Vacuum Heat")]
-    public float currentVacuumHeat = 0f;
-    public float maxVacuumHeat = 100f;
+    [SerializeField] private float currentVacuumHeat = 0f;
+    public float CurrentVacuumHeat { get { return currentVacuumHeat; } }
+    
+    [SerializeField] private float maxVacuumHeat = 100f;
+    public float MaxVacuumHeat { get { return maxVacuumHeat; } }
     public float heatAccumulationRate = 25f; // Heat per second
     public float passiveCoolingRate = 33.3f; // Heat per second
     public float overheatLockoutDuration = 2.0f;
@@ -238,6 +257,16 @@ public class PlayerController : MonoBehaviour
     public void AddOxygen(int amount)
     {
         currentOxygen = Mathf.Min(maxOxygen, currentOxygen + amount);
+    }
+
+    public void ConsumeCarbon(int amount)
+    {
+        currentCarbon = Mathf.Max(0, currentCarbon - amount);
+    }
+
+    public void ConsumeOxygen(int amount)
+    {
+        currentOxygen = Mathf.Max(0, currentOxygen - amount);
     }
 
     public void AddBioMatter(int amount)

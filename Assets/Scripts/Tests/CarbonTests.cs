@@ -17,8 +17,7 @@ public class CarbonTests
         player = playerObj.AddComponent<PlayerController>();
         weapon = playerObj.AddComponent<PlayerWeapon>();
         
-        player.maxCarbon = 100;
-        player.currentCarbon = 0;
+        // Stats initialize to defaults.
     }
 
     [TearDown]
@@ -42,6 +41,6 @@ public class CarbonTests
         
         InvokeOnCollect(carbon);
         
-        Assert.AreEqual(1, player.currentCarbon, "Carbon collectible did not add 1 carbon.");
+        Assert.AreEqual(1, player.CurrentCarbon, "Carbon collectible did not add 1 carbon.");
     }
 }
